@@ -1,0 +1,23 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}"
+	name="${project.name}" plugins-version="2">
+	<plugin-info>
+		<description>${project.description}</description>
+		<version>${project.version}</version>
+		<vendor name="${project.organization.name}" url="${project.organization.url}" />
+	</plugin-info>
+
+	<rest key="rest-service-resources" path="/essence" version="1.0">
+		<description>Essencs APIs.</description>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</rest>
+
+	<servlet-filter name="Essence dispatcher" key="essence-dispatcher"
+		class="com.b88m.essence.confluence.EssenceFilter" location="before-dispatch"
+		weight="200">
+		<description>Essence dispatcher servlet (the place of all magic).</description>
+		<url-pattern>/e/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</servlet-filter>
+ 
+</atlassian-plugin>

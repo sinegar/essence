@@ -1,0 +1,17 @@
+CACHE MANIFEST
+#v1.0.0
+zepto.js
+underscore.js
+backbone.js
+essence.js
+essence.css
+#length: 8
+data/favourites
+offline.png
+
+NETWORK:
+data/document
+CACHE:
+
+FALLBACK:
+online.png offline.png

@@ -1,0 +1,39 @@
+!!! 5
+%html
+	%head
+		%title Essence of Confluence - the plugin
+		%meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+		%meta(name="apple-mobile-web-app-status-bar-style" content="black")
+		%style * {margin:0;padding:0;font-size:1em;}body{font-family: "Verdana", "Helvetica", sans-serif;background-color:#202020;color:#f0f0f0;line-height:1.1em;}p{margin-bottom:10px;}a{color:inherit;}.main{margin: 50px auto;width:1000px}.content{width:300px;}.promo{width:640px;float:right;}.actions{line-height:3em;margin:40px 0;}.actions li{display:inline-block; width:96px;text-align:center;}.action{text-decoration:none;border: 1px solid #606060;border-radius:8px;padding: 10px 5px;background-color:#404040;font-size:1.1em;}.action:active{color:#606060;background-color: #202020;border-color: #404040;}
+		
+	%body
+		.main
+			.promo
+				%iframe(class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/sRgE6uC_uW4" frameborder="0")
+			.content 
+				%p
+					Essence is a plugin for 
+					%a(href="www.atlassian.com/software/confluence/") Atlassian Confluence&reg;
+					%span> . 
+				%p	It adds a mobile friendly skin to your Confluence content. 
+				%p	The initial release is an off-line wallet of you favourite pages. 
+				%p
+					%ol.actions
+						%li
+							%a.action(href="demo.html" target="demo") Try
+						%li
+							%a.action(href="demo.html#document/XXXX" target="demo") Install
+						%li
+							%a.action(href="http://codegeist.atlassian.com/entry/XXXXXX") Vote
+				and 
+				%a(href="") 1 more thing
+				%span> .
+		%noscript
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16974850-3']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();			

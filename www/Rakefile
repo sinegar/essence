@@ -1,0 +1,70 @@
+require 'closure-compiler'
+require 'haml'
+require 'sass'
+
+HEADER = "/* essence javascripts. Includes a modified http://www.ivan.fomichev.name/2008/04/javascript-creole-10-wiki-markup-parser.html wiki parser. */ \n"
+
+JS_FILES    = [
+        'src/js/wiki.js',
+        'src/js/app.js'
+]
+
+CSS_FILES    = [
+        'src/css/default.css',
+        'src/css/wiki.css'
+]
+
+OUTPUT = "../src/main/resources/www/"
+
+task :default => [:buildhtml, :buildjs, :buildcss]
+
+desc "Build the html"
+task :buildhtml do
+  source = File.read 'src/essence.haml'
+  File.open(File.join(OUTPUT, 'essence.html'), 'w+') do |file|
+    file.write Haml::Engine.new(source, options = {:ugly => true}).render
+  end
+  source = File.read 'src/index.haml'
+  File.open('site/index.html', 'w+') do |file|
+    file.write Haml::Engine.new(source, options = {:ugly => true}).render
+  end
+  source = File.read 'src/demo.haml'
+  File.open('site/demo.html', 'w+') do |file|
+    file.write Haml::Engine.new(source, options = {:ugly => true}).render
+  end
+  source = File.read 'src/404.haml'
+  File.open('site/404.html', 'w+') do |file|
+    file.write Haml::Engine.new(source, options = {:ugly => true}).render
+  end
+end
+
+
+desc "Build the minified javascripts"
+task :buildjs => :concatjs do
+  source = File.read 'essence.js'
+  File.open(File.join(OUTPUT, 'essence.js'), 'w+') do |file|
+    file.write HEADER + Closure::Compiler.new.compress(source)
+  end
+end
+
+desc "Concatenate javascripts"
+task :concatjs do
+  File.open('essence.js',"w") do |f|
+    f.puts JS_FILES.map{ |s| IO.read(s) }
+  end
+end
+
+desc "Build the css"
+task :buildcss => :concatcss do
+  source = File.read 'essence.css'
+  File.open(File.join(OUTPUT, 'essence.css'), 'w+') do |file|
+    file.write Sass::Engine.new(source, options = { :syntax => :scss, :style => :compressed}).render
+  end
+end
+
+desc "Concatenate css"
+task :concatcss do
+  File.open('essence.css',"w") do |f|
+    f.puts CSS_FILES.map{ |s| IO.read(s) }
+  end
+end

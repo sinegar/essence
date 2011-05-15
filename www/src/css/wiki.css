@@ -1,0 +1,33 @@
+.content ol,.content ul {
+	margin: 3px 3px 3px 2em;
+}
+
+.content a {
+	color: darkblue;
+}
+
+.content th,.content td {
+	border: 1px solid black;
+	padding: 3px;
+}
+
+.content h1 {
+	font-size: 1.1em;
+}
+
+.content h1,.content h2,.content h3,.content h4,.content h5,.content h6 {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.content p {
+	margin-top: 10px;
+}
+
+.content pre {
+	font-size: 0.9em;
+	margin: 3px -5px;
+	background-color: #D0D0D0;
+	color: #000000;
+	white-space: pre-wrap;
+}

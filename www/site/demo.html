@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html manifest='essence.mf?os_authType=basic'>
+<head>
+<title>Essence</title>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
+<meta content='black' name='apple-mobile-web-app-status-bar-style' />
+<link href='essence.css' media='all' rel='stylesheet' type='text/css' />
+</head>
+<body>
+<div id='main'>
+<div class='message'>
+<div id='message'></div>
+<noscript>Essence requires JavaScript. Please enable it and refresh this page.</noscript>
+</div>
+<section class='panel hidden' id='index'>
+<div class='toolbar'>
+<a name=''></a>
+<h2>Essence of Confluence</h2>
+</div>
+<ul class='menu'>
+<li><h2><a class='item' href='#favourite' id='favourite'>Favourites</a></h2></li>
+</ul>
+<h3 class='separator'>About</h3>
+<div class='content'>
+<p>Essence is a skim skin for Confluence, specially designed for mobile devices.</p>
+<p>This initial version keeps an offline copy of all your favourite pages and displays with limited wiki syntax support.</p>
+</div>
+</section>
+<section class='panel hidden' id='folder'>
+<div class='toolbar'>
+<div class='left'><a class='button' href='#'>Back</a></div>
+<div class='right'><a class='button' href='#refresh'>Refresh</a></div>
+<h2>Favourites</h2>
+</div>
+<ul class='menu' id='favourite-list'>
+<li class='loading'>Loading...</li>
+</ul>
+</section>
+<section class='panel hidden' id='document'></section>
+<div class='footer'>- <a href='http://essence.b88m.com'>essence</a> v1<img src='online.png?os_authType=basic' alt='status' width='2' height='2'/>00 -</div>
+</div>
+<script id='favourite-item-template' type='text/template'>
+<a href='#document/<%= id %>' class='item <% if (isCached) print('cached'); %>'><%= title %></a>
+</script>
+<script id='loading-template' type='text/template'>
+<div class='toolbar'>
+<div class='left'><a class='button' href='#favourite'>Back</a></div>
+<h2 class='loading'>Loading...</h2>
+</div>
+</script>
+<script id='document-template' type='text/template'>
+<div class='toolbar'>
+<div class='left'><a class='button' href='#favourite'>Back</a></div>
+<h2><%= title %></h2>
+</div>
+<div class='content' id='wiki'></div>
+</script>
+<script src='zepto.js'></script>
+<script src='underscore.js'></script>
+<script src='backbone.js'></script>
+<script src='essence.js'></script>
+</body>
+</html>
