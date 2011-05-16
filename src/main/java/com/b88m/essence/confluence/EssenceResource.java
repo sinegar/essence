@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.atlassian.confluence.core.ContentEntityObject;
 import com.atlassian.confluence.labels.Label;
 import com.atlassian.confluence.labels.LabelManager;
 import com.atlassian.confluence.pages.Page;
@@ -61,19 +62,20 @@ public class EssenceResource {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Page> findMyFavourites() {
+	public List<ContentEntityObject> findMyFavourites() {
 		return labelManager.getCurrentContentForLabel(getLabel("my:favourite"));
 	}
 
-	private Page getPage(Long id) {
-		return (Page) pageManager.getById(id);
+	private ContentEntityObject getPage(Long id) {
+		return (ContentEntityObject) pageManager.getById(id);
 	}
 
 	private Label getLabel(String label) {
 		return labelManager.getLabel(label);
 	}
 
-	private static final class Mapper implements Function<Page, Document> {
+	private static final class Mapper implements
+			Function<ContentEntityObject, Document> {
 
 		private final boolean skippContent;
 
@@ -86,12 +88,17 @@ public class EssenceResource {
 		}
 
 		@Override
-		public Document get(Page from) {
-			// TODO space key was replaced with null cause LazyLoading exception
-			// do to servlet forward
-			return new Document(from.getId(), null, from.getTitle(), from
-					.getLastModificationDate(), from.getLastModifierName(),
-					skippContent ? null : from.getContent());
+		public Document get(ContentEntityObject from) {
+			Document document = null;
+			if (from instanceof Page) {
+				// TODO space key was replaced with null cause LazyLoading
+				// exception do to servlet forward
+				document = new Document(from.getId(), null, from.getTitle(),
+						from.getLastModificationDate(), from
+								.getLastModifierName(), skippContent ? null
+								: from.getContent());
+			}
+			return document;
 		}
 	}
 }
