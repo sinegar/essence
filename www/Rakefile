@@ -41,7 +41,7 @@ end
 
 desc "Build the minified javascripts"
 task :buildjs => :concatjs do
-  source = File.read 'essence.js'
+  source = File.read 'site/essence.js'
   File.open(File.join(OUTPUT, 'essence.js'), 'w+') do |file|
     file.write HEADER + Closure::Compiler.new.compress(source)
   end
@@ -49,14 +49,14 @@ end
 
 desc "Concatenate javascripts"
 task :concatjs do
-  File.open('essence.js',"w") do |f|
+  File.open('site/essence.js',"w") do |f|
     f.puts JS_FILES.map{ |s| IO.read(s) }
   end
 end
 
 desc "Build the css"
 task :buildcss => :concatcss do
-  source = File.read 'essence.css'
+  source = File.read 'site/essence.css'
   File.open(File.join(OUTPUT, 'essence.css'), 'w+') do |file|
     file.write Sass::Engine.new(source, options = { :syntax => :scss, :style => :compressed}).render
   end
@@ -64,7 +64,7 @@ end
 
 desc "Concatenate css"
 task :concatcss do
-  File.open('essence.css',"w") do |f|
+  File.open('site/essence.css',"w") do |f|
     f.puts CSS_FILES.map{ |s| IO.read(s) }
   end
 end
