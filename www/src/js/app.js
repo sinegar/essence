@@ -11,6 +11,11 @@
 // * https://github.com/documentcloud/backbone/blob/master/examples/todos/todos.js  
 // 
 
+if (!navigator.userAgent.match(/WebKit\/([\d.]+)/)) {
+	document.getElementById('message').innerHTML = "Unsupported browser."
+			+ " Please try a webkit browser like Safari, Chrome or your mobile.";
+}
+
 // Start processing when DOM is ready. 
 $(function (){
 
@@ -196,8 +201,3 @@ Backbone.history.start();
 
 // end of DOM wait 
 });
-
-if (!navigator.userAgent.match(/WebKit\/([\d.]+)/)) {
-	document.getElementById('message').innerHTML = "Unsupported browser."
-			+ " Please try a webkit browser like Safari, Chrome or your mobile.";
-}
